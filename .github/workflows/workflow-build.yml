@@ -36,17 +36,18 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v4
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-          node-version: '20'
-          cache: 'npm'
+          directory: ./
+          framework: terraform 
 
-      - name: NodeJS sample output text
+      - name: Checkov sample output text
         run: |
-          echo "Running build and test steps for Node.js environment: ${{ github.event.inputs.environment }}"
+          echo "Running build and test steps for Checkov environment: ${{ github.event.inputs.environment }}"
           # Add your build and test commands here
-          echo "Build and test steps completed successfully for Node.js environment: ${{ github.event.inputs.environment }}"       
+          echo "Build and test steps completed successfully for Checkov environment: ${{ github.event.inputs.environment }}"       
 
 
 
