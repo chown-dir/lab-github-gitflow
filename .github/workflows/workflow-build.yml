@@ -12,7 +12,7 @@ on:
           - prod
 
 jobs:
-  buildtest:
+  TerraformBuild:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -30,7 +30,7 @@ jobs:
           # Add your build and test commands here
           echo "Build and test steps completed successfully for Terraform environment: ${{ github.event.inputs.environment }}"
 
-  buildtest2:
+  CheckovScan:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
