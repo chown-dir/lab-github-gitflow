@@ -1,2 +1,6 @@
 # Assign the platform team and a user to the .github directory
+*   @chown-dir
+*   @theprimscholar
+
 /.github/   @chown-dir
+
