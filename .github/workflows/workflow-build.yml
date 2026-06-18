@@ -1,0 +1,54 @@
+name: Build
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - uat
+          - prod
+
+jobs:
+  buildtest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        id: tfsetup
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.15.6
+
+      - name: TF sample output text
+        run: |
+          echo "Running build and test steps for Terraform environment: ${{ github.event.inputs.environment }}"
+          # Add your build and test commands here
+          echo "Build and test steps completed successfully for Terraform environment: ${{ github.event.inputs.environment }}"
+
+  buildtest2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: NodeJS sample output text
+        run: |
+          echo "Running build and test steps for Node.js environment: ${{ github.event.inputs.environment }}"
+          # Add your build and test commands here
+          echo "Build and test steps completed successfully for Node.js environment: ${{ github.event.inputs.environment }}"       
+
+
+
+
+
