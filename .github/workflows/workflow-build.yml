@@ -42,7 +42,16 @@ jobs:
         run: |
           echo "Running build and test steps for Checkov"
           # Add your build and test commands here
-          echo "Build and test steps completed successfully for Checkov"       
+          echo "Build and test steps completed successfully for Checkov"
+
+  HelloWorld:
+    runs-on: ubuntu-latest
+    needs: [TerraformBuild, CheckovScan]
+    steps:
+      - name: Hello to whoever triggered me
+        run: echo "The workflow was triggered by $GITHUB_ACTOR"
+
+
 
 
 
