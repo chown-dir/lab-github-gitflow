@@ -1,15 +1,9 @@
 name: Build
 on:
+  push:
+    branches:
+      - feature/demo-gh-actions
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to deploy to'
-        default: 'dev'
-        type: choice
-        options:
-          - dev
-          - uat
-          - prod
 
 jobs:
   TerraformBuild:
@@ -26,9 +20,9 @@ jobs:
 
       - name: TF sample output text
         run: |
-          echo "Running build and test steps for Terraform environment: ${{ github.event.inputs.environment }}"
+          echo "Running build and test steps for Terraform"
           # Add your build and test commands here
-          echo "Build and test steps completed successfully for Terraform environment: ${{ github.event.inputs.environment }}"
+          echo "Build and test steps completed successfully for Terraform"
 
   CheckovScan:
     runs-on: ubuntu-latest
@@ -45,9 +39,9 @@ jobs:
 
       - name: Checkov sample output text
         run: |
-          echo "Running build and test steps for Checkov environment: ${{ github.event.inputs.environment }}"
+          echo "Running build and test steps for Checkov"
           # Add your build and test commands here
-          echo "Build and test steps completed successfully for Checkov environment: ${{ github.event.inputs.environment }}"       
+          echo "Build and test steps completed successfully for Checkov"       
 
 
 
