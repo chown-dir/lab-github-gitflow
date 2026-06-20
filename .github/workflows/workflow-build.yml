@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'feature/demo-gh-actions'
+      - 'feature/gh-actions-*'
   workflow_dispatch:
 
 jobs:
