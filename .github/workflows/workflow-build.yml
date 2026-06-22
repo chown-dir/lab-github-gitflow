@@ -1,0 +1,59 @@
+name: Demo Workflow for GitHub Actions
+on:
+  push:
+    branches:
+      - 'feature/demo-gh-actions'
+      - 'feature/gh-actions-*'
+  workflow_dispatch:
+
+jobs:
+  TerraformBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        id: tfsetup
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.15.6
+
+      - name: TF sample output text
+        run: |
+          echo "Running build and test steps for Terraform"
+          # Add your build and test commands here
+          echo "Build and test steps completed successfully for Terraform"
+
+  CheckovScan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ./
+          framework: terraform 
+
+      - name: Checkov sample output text
+        run: |
+          echo "Running build and test steps for Checkov"
+          # Add your build and test commands here
+          echo "Build and test steps completed successfully for Checkov"
+
+  HelloWorld:
+    runs-on: ubuntu-latest
+    needs: [TerraformBuild, CheckovScan]
+    steps:
+      - name: Hello to whoever triggered me
+        run: echo "The workflow was triggered by $GITHUB_ACTOR"
+
+
+
+
+
+
+
